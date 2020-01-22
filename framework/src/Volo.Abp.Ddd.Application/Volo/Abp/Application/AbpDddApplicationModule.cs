@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Volo.Abp.Application.Cqrs;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Authorization;
 using Volo.Abp.Domain;
@@ -35,6 +36,9 @@ namespace Volo.Abp.Application
                 options.IgnoredInterfaces.AddIfNotContains(typeof(IRemoteService));
                 options.IgnoredInterfaces.AddIfNotContains(typeof(IApplicationService));
                 options.IgnoredInterfaces.AddIfNotContains(typeof(IUnitOfWorkEnabled));
+                options.IgnoredInterfaces.AddIfNotContains(typeof(ICommandHandler<>));
+                options.IgnoredInterfaces.AddIfNotContains(typeof(ICommandHandler<,>));
+                options.IgnoredInterfaces.AddIfNotContains(typeof(IQueryHandler<,>));
             });
         }
     }
