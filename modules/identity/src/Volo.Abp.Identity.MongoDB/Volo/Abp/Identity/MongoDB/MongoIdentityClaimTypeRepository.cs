@@ -16,23 +16,23 @@ namespace Volo.Abp.Identity.MongoDB
         {
         }
 
-        public async Task<bool> AnyAsync(string name, Guid? ignoredId = null)
+        public virtual async Task<bool> AnyAsync(string name, Guid? ignoredId = null)
         {
             if (ignoredId == null)
             {
                 return await GetMongoQueryable()
                     .Where(ct => ct.Name == name)
-                    .AnyAsync().ConfigureAwait(false);
+                    .AnyAsync();
             }
             else
             {
                 return await GetMongoQueryable()
                     .Where(ct => ct.Id != ignoredId && ct.Name == name)
-                    .AnyAsync().ConfigureAwait(false);
+                    .AnyAsync();
             }
         }
 
-        public async Task<List<IdentityClaimType>> GetListAsync(string sorting, int maxResultCount, int skipCount, string filter)
+        public virtual async Task<List<IdentityClaimType>> GetListAsync(string sorting, int maxResultCount, int skipCount, string filter)
         {
             return await GetMongoQueryable()
                 .WhereIf<IdentityClaimType, IMongoQueryable<IdentityClaimType>>(
@@ -43,7 +43,7 @@ namespace Volo.Abp.Identity.MongoDB
                 .OrderBy(sorting ?? nameof(IdentityClaimType.Name))
                 .As<IMongoQueryable<IdentityClaimType>>()
                 .PageBy<IdentityClaimType, IMongoQueryable<IdentityClaimType>>(skipCount, maxResultCount)
-                .ToListAsync().ConfigureAwait(false);
+                .ToListAsync();
         }
     }
 }

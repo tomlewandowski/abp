@@ -9,7 +9,7 @@ namespace Volo.Abp.Identity.Web.Navigation
 {
     public class AbpIdentityWebMainMenuContributor : IMenuContributor
     {
-        public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+        public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
         {
             if (context.Menu.Name != StandardMenus.Main)
             {
@@ -18,8 +18,8 @@ namespace Volo.Abp.Identity.Web.Navigation
 
             var authorizationService = context.ServiceProvider.GetRequiredService<IAuthorizationService>();
 
-            var hasRolePermission = await authorizationService.IsGrantedAsync(IdentityPermissions.Roles.Default).ConfigureAwait(false);
-            var hasUserPermission = await authorizationService.IsGrantedAsync(IdentityPermissions.Users.Default).ConfigureAwait(false);
+            var hasRolePermission = await authorizationService.IsGrantedAsync(IdentityPermissions.Roles.Default);
+            var hasUserPermission = await authorizationService.IsGrantedAsync(IdentityPermissions.Users.Default);
 
             if (hasRolePermission || hasUserPermission)
             {

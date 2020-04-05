@@ -205,6 +205,10 @@ public class AuthorAppService : ApplicationService, IAuthorAppService
 
 参阅 [基于策略的授权](https://docs.microsoft.com/zh-cn/aspnet/core/security/authorization/policies) 文档了解如何自定义策略.
 
+### 更改依赖模块的权限定义
+
+从 `PermissionDefinitionProvider` 派生的类(就像上面的示例一样) 可以获取现有的权限定义(由依赖[模块](Module-Development-Basics.md)定义)并更改其定义.
+
 ## IAuthorizationService
 
 ASP.NET Core 提供了 `IAuthorizationService` 用于检查权限. 注入后使用它进行条件控制权限.
@@ -336,10 +340,10 @@ public class SystemAdminPermissionValueProvider : PermissionValueProvider
 * `PermissionGrantResult.Prohibited` 禁止授权用户,任何一个授权值提供程序返回了 `Prohibited`, 那么其他的提供程序返回的值都不再重要.
 * `PermissionGrantResult.Undefined` 代表当前无法确定是否授予或禁止权限, 返回`UnDefined`由其他权限值提供程序检查权限.
 
-定义`Provider`后将其添加到 `PermissionOptions`,如下所示:
+定义`Provider`后将其添加到 `AbpPermissionOptions`,如下所示:
 
 ````csharp
-Configure<PermissionOptions>(options =>
+Configure<AbpPermissionOptions>(options =>
 {
     options.ValueProviders.Add<SystemAdminPermissionValueProvider>();
 });
@@ -367,4 +371,5 @@ public override void ConfigureServices(ServiceConfigurationContext context)
 ## 接下来
 
 * [权限管理模块](Modules/Permission-Management.md)
-* [ASP.NET Core MVC / Razor 页面 JavaScript Auth API](AspNetCore/JavaScript-API/Auth.md)
+* [ASP.NET Core MVC / Razor 页面 JavaScript Auth API](API/JavaScript-API/Auth.md)
+* [Angular界面中的权限管理](UI/Angular/Permission-Management.md)

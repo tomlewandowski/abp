@@ -2,11 +2,12 @@
 
 ## Introduction
 
-This template provides a layered application structure based on the [Domain Driven Design](../Domain-Driven-Design.md) (DDD) practices. This document explains the solution structure and projects in details. If you want to start quickly, follow the guides below:
+This template provides a layered application structure based on the [Domain Driven Design](../Domain-Driven-Design.md) (DDD) practices. 
 
-* See [Getting Started With the ASP.NET Core MVC Template](../Getting-Started-AspNetCore-MVC-Template.md) to create a new solution and run it for this template (uses MVC as the UI framework and Entity Framework Core as the database provider).
-* See the [ASP.NET Core MVC Application Development Tutorial](../Tutorials/AspNetCore-Mvc/Part-I.md) to learn how to develop applications using this template (uses MVC as the UI framework and Entity Framework Core as the database provider).
-* See the [Angular Application Development Tutorial](../Tutorials/Angular/Part-I.md) to learn how to develop applications using this template (uses Angular as the UI framework and MongoDB as the database provider).
+This document explains **the solution structure** and projects in details. If you want to start quickly, follow the guides below:
+
+* [The getting started document](../Getting-Started-With-Startup-Templates.md) explains how to create a new application in a few minutes.
+* [The application development tutorial](../Tutorials/Part-1) explains step by step application development.
 
 ## How to Start With?
 
@@ -123,6 +124,8 @@ Notice that the migration `DbContext` is only used for database migrations and *
 * Depends on the `.EntityFrameworkCore` project since it re-uses the configuration defined for the `DbContext` of the application.
 
 > This project is available only if you are using EF Core as the database provider.
+>
+> See the [Entity Framework Core Migrations Guide](../Entity-Framework-Core-Migrations.md) to understand this project in details.
 
 #### .DbMigrator Project
 
@@ -145,7 +148,7 @@ While creating database & applying migrations seems only necessary for relationa
 
 This project is used to define your API Controllers.
 
-Most of time you don't need to manually define API Controllers since ABP's [Auto API Controllers](../AspNetCore/Auto-API-Controllers.md) feature creates them automagically based on your application layer. However, in case of you need to write API controllers, this is the best place to do it.
+Most of time you don't need to manually define API Controllers since ABP's [Auto API Controllers](../API/Auto-API-Controllers.md) feature creates them automagically based on your application layer. However, in case of you need to write API controllers, this is the best place to do it.
 
 * Depends on the `.Application.Contracts` project to be able to inject the application service interfaces.
 
@@ -153,7 +156,7 @@ Most of time you don't need to manually define API Controllers since ABP's [Auto
 
 This is a project that defines C# client proxies to use the HTTP APIs of the solution. You can share this library to 3rd-party clients, so they can easily consume your HTTP APIs in their Dotnet applications (For other type of applications, they can still use your APIs, either manually or using a tool in their own platform)
 
-Most of time you don't need to manually create C# client proxies, thanks to ABP's [Dynamic C# API Clients](../AspNetCore/Dynamic-CSharp-API-Clients.md) feature.
+Most of time you don't need to manually create C# client proxies, thanks to ABP's [Dynamic C# API Clients](../API/Dynamic-CSharp-API-Clients.md) feature.
 
 `.HttpApi.Client.ConsoleTestApp` project is a console application created to demonstrate the usage of the client proxies.
 
@@ -269,5 +272,5 @@ The files under the `angular/src/environments` folder has the essential configur
 
 ## What's Next?
 
-- See [Getting Started With the ASP.NET Core MVC Template](../Getting-Started-AspNetCore-MVC-Template.md) to create a new solution and run it for this template.
-- See the [ASP.NET Core MVC Tutorial](../Tutorials/AspNetCore-Mvc/Part-I.md) to learn how to develop applications using this template.
+- [The getting started document](../Getting-Started-With-Startup-Templates.md) explains how to create a new application in a few minutes.
+- [The application development tutorial](../Tutorials/Part-1) explains step by step application development.

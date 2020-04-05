@@ -12,9 +12,9 @@ namespace Volo.Abp.Account.Web.Pages.Account
     {
         public List<SelectListItem> Providers { get; set; }
         
-        public async Task<IActionResult> OnGetAsync()
+        public virtual async Task<IActionResult> OnGetAsync()
         {
-            var user = await SignInManager.GetTwoFactorAuthenticationUserAsync().ConfigureAwait(false);
+            var user = await SignInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
                 return RedirectToPage("./Login");
@@ -41,5 +41,9 @@ namespace Volo.Abp.Account.Web.Pages.Account
             //);
         }
 
+        public virtual Task OnPostAsync()
+        {
+            return Task.CompletedTask;
+        }
     }
 }

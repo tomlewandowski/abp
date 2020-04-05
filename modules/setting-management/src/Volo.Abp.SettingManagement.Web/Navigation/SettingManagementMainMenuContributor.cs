@@ -12,7 +12,7 @@ namespace Volo.Abp.SettingManagement.Web.Navigation
 {
     public class SettingManagementMainMenuContributor : IMenuContributor
     {
-        public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+        public virtual async Task ConfigureMenuAsync(MenuConfigurationContext context)
         {
             if (context.Menu.Name != StandardMenus.Main)
             {
@@ -23,7 +23,7 @@ namespace Volo.Abp.SettingManagement.Web.Navigation
             var settingPageCreationContext = new SettingPageCreationContext(context.ServiceProvider);
             if (
                 !settingManagementPageOptions.Contributors.Any() ||
-                !(await CheckAnyOfPagePermissionsGranted(settingManagementPageOptions, settingPageCreationContext).ConfigureAwait(false))
+                !(await CheckAnyOfPagePermissionsGranted(settingManagementPageOptions, settingPageCreationContext))
                 )
             {
                 return;
@@ -43,13 +43,13 @@ namespace Volo.Abp.SettingManagement.Web.Navigation
                 );
         }
 
-        private async Task<bool> CheckAnyOfPagePermissionsGranted(
+        protected virtual async Task<bool> CheckAnyOfPagePermissionsGranted(
             SettingManagementPageOptions settingManagementPageOptions,
             SettingPageCreationContext settingPageCreationContext)
         {
             foreach (var contributor in settingManagementPageOptions.Contributors)
             {
-                if (await contributor.CheckPermissionsAsync(settingPageCreationContext).ConfigureAwait(false))
+                if (await contributor.CheckPermissionsAsync(settingPageCreationContext))
                 {
                     return true;
                 }
